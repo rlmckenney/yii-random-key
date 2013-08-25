@@ -1,0 +1,14 @@
+{
+    "name": "rlmckenney/yii-random-key",
+    "description": "A Yii Framework behavior class to generate UIDs of a given integer length and target data type.",
+    "keywords": ["UID", "random", "primary key", "integer"],
+    "type": "yii-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert McKenney",
+            "email": "robert@mckenney.ca",
+            "homepage": "http://robertmckenney.info/"
+        }
+    ]
+}
