@@ -51,9 +51,16 @@ Add the following parameters to the components section of your config
     ),
 ),
 ```
-
-Then in your model when you need to generate a new primary key:
-
+If you omit the dataType and digits property values from the config, the behavior will default to
+```php
+'dataType' => 'INT'
+'digits'   => 10
+```
+Then in your model when you need to generate a new primary key, simply call get the randomKey property:
+```php
+$id = Yii::app()->db->uid->randomKey;
+```
+Or, to override your defaults, call it like this:
 ```php
 Yii::app()->db->uid->dataType   = 'BIGINT';  // optionally override the default property values
 Yii::app()->db->uid->digits     = 15;        // optionally override the default property values
