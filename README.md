@@ -1,4 +1,4 @@
-yii-random-key
+Yii RandomKey
 ==============
 
 A Yii Framework behavior class to generate UIDs of a given integer length and target data type.
@@ -10,7 +10,27 @@ You will still need to do unique collision tests on inserts, but this will give 
 advantages of a non-sequential primary key when it will be exposed to the user, but still retain the performance
 of an integer based primary key value.
 
-**Usage:**
+The following target data types have the associated maximum digits:
+<pre>
+'TINYINT'   =>  8 bit - Max  3 digits
+'SMALLINT'  => 16 bit - Max  5 digits
+'MEDIUMINT' => 24 bit - Max  8 digits
+'INT'       => 32 bit - Max 10 digits
+'BIGINT'    => 64 bit - Max 18 digits (see note)
+</pre>
+
+It will automatically detect if you are running on a 32 bit OS and impose reduced limits. 
+i.e. INT max digits = 9 and BIGINT not available.
+
+
+**NOTE:**
+PHP does not support unsigned integers, so the max value here is half of the full range on MySQL.
+If you want to use the full range of BIG_INT, I recommend that you use the UUID_SHORT() function in MySQL.
+http://dev.mysql.com/doc/refman/5.6/en/miscellaneous-functions.html#function_uuid-short
+
+
+Usage
+------
 
 The behavior can be attached to a specific model, controller, or component. To make it easily accessible
 application wide, you may wish to attach it to your application's db component.
