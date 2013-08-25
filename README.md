@@ -19,14 +19,14 @@ The following target data types have the associated maximum digits:
 'BIGINT'    => 64 bit - Max 18 digits (see note)
 </pre>
 
-It will automatically detect if you are running on a 32 bit OS and impose reduced limits. 
-i.e. INT max digits = 9 and BIGINT not available.
-
 
 **NOTE:**
-PHP does not support unsigned integers, so the max value here is half of the full range on MySQL.
+PHP does not support unsigned integers, so the max value for BIGINT is half of the full range on MySQL.
 If you want to use the full range of BIG_INT, I recommend that you use the UUID_SHORT() function in MySQL.
 http://dev.mysql.com/doc/refman/5.6/en/miscellaneous-functions.html#function_uuid-short
+
+It will automatically detect if you are running on a 32 bit OS and impose reduced limits. 
+BIGINT will not be available and INT max digits = 9 with max value of 999999999 instead of the full 4294967295.
 
 
 Usage
