@@ -21,7 +21,7 @@
  *
  *              'behaviors'=>array(
  *                  'uid'=>array(
- *                      'class'    => 'vendor.rlmckenney.yii-randomkey.RandomKeyBehavior',
+ *                      'class'    => 'vendor.rlmckenney.yii-random-key.RandomKeyBehavior',
  *                      'dataType' => 'MEDIUMINT',  // optionally set your own default property values
  *                      'digits'   => 8,            // optionally set your own default property values
  *                  ),
