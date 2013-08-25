@@ -34,7 +34,7 @@ Add the following parameters to the components section of your config
 
 Then in your model when you need to generate a new primary key:
 
-```
+```php
 Yii::app()->db->uid->dataType   = 'BIGINT';  // optionally override the default property values
 Yii::app()->db->uid->digits     = 15;        // optionally override the default property values
 $id = Yii::app()->db->uid->randomKey;
