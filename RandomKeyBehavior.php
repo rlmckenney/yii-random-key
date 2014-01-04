@@ -77,6 +77,36 @@ class RandomKeyBehavior extends CBehavior
     public      $dataType = 'INT';
     protected   $_digits  = 10;
 
+    
+    /* This should be the main method called to use this behaviour with a given class.
+     * It will test the randomKey generated against the existing ids in the table for the given class,
+     * and only return a value when there is no conflict.
+     *
+     * Note: You will want to commit the returned value immediately to ensure that no conflict exists.
+     *
+     * @param string $className     for which to generate the unique id
+     *
+     * @return int $uid             ten digit number
+     */
+    public function getNewId($className)
+    {
+        $table = $className::model()->tableName();
+        $sql = <<<SQL
+        SELECT COUNT(id)
+          FROM {$table}
+         WHERE id = :uid;
+SQL;
+        $cmd = Yii::app()->db->createCommand($sql);
+        $isNotUnique = true;
+        while ($isNotUnique) {
+            $uid = $this->getRandomKey();
+            $isNotUnique = $cmd->queryScalar(array(':uid' => $uid));
+        }
+        $cmd->reset();
+
+        return $uid;
+    }
+
 
     /**
      * Generate a new random key that can be used as a primary key field for database inserts.
