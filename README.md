@@ -6,9 +6,11 @@ A Yii Framework behavior class to generate UIDs of a given integer length and ta
 This is a behavior extension for the Yii Framework version 1.1.x
 
 It adds a method to generate a random key of a desired number of digits for use as a primary key in your database.
-You will still need to do unique collision tests on inserts, but this will give you the security obfuscation
-advantages of a non-sequential primary key when it will be exposed to the user, but still retain the performance
+This will give you the security obfuscation advantages of a non-sequential primary key when it will be exposed to the user, but still retain the performance
 of an integer based primary key value.
+
+**UPDATED:**
+There is a new method <code>getNewId($className)</code>. This should be the main method called to use this behaviour with a given class. It uses the existing getRandomKey() method and will test the randomKey generated against the existing ids in the table for the given class. If there is a conflict, it will generate another key to test and only return a value when there is no conflict.
 
 The following target data types have the associated maximum digits:
 <pre>
@@ -56,13 +58,15 @@ If you omit the dataType and digits property values from the config, the behavio
 'dataType' => 'INT'
 'digits'   => 10
 ```
-Then in your model when you need to generate a new primary key, simply call get the randomKey property:
+Then in your model when you need to generate a new primary key, simply call the getNewID() method:
 ```php
-$id = Yii::app()->db->uid->randomKey;
+$id = Yii::app()->db->uid->getNewId('User');  // gets new key value and tests for conflicts with
+                                              // existing IDs in the table for the given class name
+                                              // in this example 'User'.
 ```
 Or, to override your defaults, call it like this:
 ```php
 Yii::app()->db->uid->dataType   = 'BIGINT';  // optionally override the default property values
 Yii::app()->db->uid->digits     = 15;        // optionally override the default property values
-$id = Yii::app()->db->uid->randomKey;
+$id = Yii::app()->db->uid->getNewId('User');
 ```
