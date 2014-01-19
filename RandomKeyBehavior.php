@@ -192,6 +192,7 @@ SQL;
                 break;
 
             case 8:
+            default:
                 switch ($this->dataType) {
                     case self::BIG_INT:
                         $maxValue = 9223372036854775807;  // PHP does not support unsigned integers
